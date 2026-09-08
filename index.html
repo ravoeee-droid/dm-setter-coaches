@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0e0c" />
+  <meta name="description" content="Interaktive GreenMask Demo eines Instagram AI Setters." />
+  <title>GreenMask AI Setter Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="brand-mark">GM</div>
+        <div>
+          <div class="eyebrow">GREENMASK · PRIVATE DEMO</div>
+          <div class="brand-title">Instagram AI Setter</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <div class="status-pill"><span class="status-dot"></span> Demo-Modus</div>
+        <button id="resetBtn" class="ghost-btn" type="button">Neu starten</button>
+      </div>
+    </header>
+
+    <section class="hero-copy" aria-labelledby="pageTitle">
+      <div class="hero-kicker">Vom Follower zum qualifizierten Sales Call</div>
+      <h1 id="pageTitle">Die DMs laufen. Du übernimmst erst, wenn es ums Closing geht.</h1>
+      <p>Teste den Ablauf wie ein Instagram-Follower. Rechts siehst du live, welche Informationen der Setter für den Coach aufbereitet.</p>
+      <div class="flow-strip" aria-label="Funnel-Status">
+        <div class="flow-step active" data-flow="trigger"><span>1</span><strong>Trigger</strong></div>
+        <div class="flow-line"></div>
+        <div class="flow-step" data-flow="conversation"><span>2</span><strong>Gespräch</strong></div>
+        <div class="flow-line"></div>
+        <div class="flow-step" data-flow="qualified"><span>3</span><strong>Qualifiziert</strong></div>
+        <div class="flow-line"></div>
+        <div class="flow-step" data-flow="booked"><span>4</span><strong>Call</strong></div>
+      </div>
+    </section>
+
+    <section class="demo-grid">
+      <section class="phone-panel" aria-label="Instagram DM Simulation">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="instagram-header">
+            <button class="icon-btn" aria-label="Zurück" type="button">←</button>
+            <div class="profile-row">
+              <div class="avatar avatar-green">GM</div>
+              <div>
+                <div class="profile-name">greenmask_camps <span class="verified">✓</span></div>
+                <div class="profile-status">AI Setter · antwortet sofort</div>
+              </div>
+            </div>
+            <button class="icon-btn" aria-label="Info" type="button">ⓘ</button>
+          </div>
+
+          <div id="chatLog" class="chat-log" role="log" aria-live="polite"></div>
+
+          <div id="starterArea" class="starter-area">
+            <div class="starter-label">Wähle, wie der Kontakt startet</div>
+            <div class="starter-grid">
+              <button class="starter-card" data-trigger="story" type="button">
+                <span class="starter-icon">◉</span>
+                <span><strong>Story-Reaktion</strong><small>Follower reagiert auf Coaching-Story</small></span>
+              </button>
+              <button class="starter-card" data-trigger="comment" type="button">
+                <span class="starter-icon">#</span>
+                <span><strong>Kommentar</strong><small>„COACHING“ unter Reel/Post</small></span>
+              </button>
+              <button class="starter-card" data-trigger="dm" type="button">
+                <span class="starter-icon">✦</span>
+                <span><strong>Direkte DM</strong><small>„Ich will besser kämpfen“</small></span>
+              </button>
+            </div>
+          </div>
+
+          <form id="messageForm" class="message-form" autocomplete="off">
+            <input id="messageInput" type="text" placeholder="Nachricht schreiben …" aria-label="Nachricht" disabled />
+            <button id="sendBtn" type="submit" aria-label="Senden" disabled>➤</button>
+          </form>
+        </div>
+        <div class="demo-note">Interaktive Produktsimulation · noch nicht mit dem echten Instagram-Account verbunden</div>
+      </section>
+
+      <aside class="coach-panel" aria-label="Coach Dashboard">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">COACH VIEW</div>
+            <h2>Live Lead Briefing</h2>
+          </div>
+          <div id="leadTemp" class="temperature cold">Kalt</div>
+        </div>
+
+        <div class="score-card">
+          <div class="score-head"><span>Lead Score</span><strong id="scoreValue">12</strong><span>/100</span></div>
+          <div class="score-bar"><div id="scoreFill" class="score-fill" style="width:12%"></div></div>
+          <div id="scoreReason" class="score-reason">Noch keine Qualifizierungsdaten.</div>
+        </div>
+
+        <div class="lead-card">
+          <div class="lead-card-head">
+            <div>
+              <div class="muted">Kontakt</div>
+              <div id="leadName" class="lead-name">Instagram Follower</div>
+            </div>
+            <span id="stageBadge" class="stage-badge">Neu</span>
+          </div>
+
+          <dl class="lead-facts">
+            <div><dt>Ziel</dt><dd id="goalValue">—</dd></div>
+            <div><dt>Empfohlenes Angebot</dt><dd id="offerValue">—</dd></div>
+            <div><dt>Erfahrung</dt><dd id="experienceValue">—</dd></div>
+            <div><dt>Zeitraum</dt><dd id="timelineValue">—</dd></div>
+            <div><dt>Hauptproblem</dt><dd id="problemValue">—</dd></div>
+            <div><dt>Commitment</dt><dd id="commitmentValue">—</dd></div>
+          </dl>
+        </div>
+
+        <div class="summary-card">
+          <div class="summary-title"><span>✦</span> AI Zusammenfassung</div>
+          <p id="summaryText">Sobald der Setter genug Kontext hat, entsteht hier automatisch das Briefing für den Verkaufscall.</p>
+        </div>
+
+        <div class="event-card">
+          <div class="event-title">Automation Timeline</div>
+          <div id="eventTimeline" class="event-timeline">
+            <div class="event muted-event"><span></span><p>Warte auf Instagram-Trigger …</p></div>
+          </div>
+        </div>
+
+        <div id="handoverCard" class="handover-card hidden">
+          <div class="handover-top"><span class="pulse-dot"></span><strong>Dein Part beginnt jetzt.</strong></div>
+          <p>Der Lead ist qualifiziert und der Call ist vorbereitet. Du musst nur noch closen.</p>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <template id="botBubbleTemplate">
+    <div class="message-row bot-row">
+      <div class="mini-avatar">GM</div>
+      <div class="message-bubble bot-bubble"></div>
+    </div>
+  </template>
+
+  <template id="userBubbleTemplate">
+    <div class="message-row user-row">
+      <div class="message-bubble user-bubble"></div>
+    </div>
+  </template>
+
+  <template id="quickRepliesTemplate">
+    <div class="quick-replies"></div>
+  </template>
+
+  <template id="bookingTemplate">
+    <div class="booking-card">
+      <div class="booking-label">15 Min. Kennenlern-Call</div>
+      <div class="booking-title">Wähle einen Termin</div>
+      <div class="booking-slots"></div>
+      <div class="booking-foot">Direkt mit Niklas · unverbindlich</div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
